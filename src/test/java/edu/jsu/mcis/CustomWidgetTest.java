@@ -10,7 +10,7 @@ public class CustomWidgetTest {
     private CustomWidget widget;
     
     private Point getCenterOfWidget() {
-        Rectangle bounds = widget.getShape().getBounds();
+        Rectangle bounds = widget.getHexagon().getBounds();
         return new Point(bounds.x + bounds.width/2, bounds.y + bounds.height/2);
     }
     
@@ -20,8 +20,8 @@ public class CustomWidgetTest {
     }
     
 	@Test
-	public void testWidgetIsInitiallyDeselected() {
-		assertFalse(widget.isSelected());
+	public void testHexagonIsInitiallySelected() {
+		assertTrue(widget.isSelected());
 	}
     
     @Test

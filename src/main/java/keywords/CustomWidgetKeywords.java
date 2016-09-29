@@ -27,28 +27,39 @@ public class CustomWidgetKeywords {
         // w.whatever();
     }
     
-    @RobotKeyword("Clicks inside the shape of the custom widget.\n")
+    @RobotKeyword("Clicks inside the hexagon of the custom widget.\n")
     @ArgumentNames({})
-    public void clickCustomWidgetInside() {
+    public void clickHexagonInside() {
+        ContainerOperator context = (ContainerOperator) Context.getContext();
+        ComponentChooser chooser = new CustomWidgetChooser();
+        JComponentOperator operator = new JComponentOperator(context, chooser);
+        CustomWidget w = (CustomWidget)operator.getSource();
+        Rectangle bounds = w.getHexagon().getBounds();
+        operator.clickMouse(bounds.x + bounds.width/2, bounds.y + bounds.height/2, 1);
+    }
+    
+    @RobotKeyword("Clicks outside the bounds of the custom widget.\n")
+    @ArgumentNames({})
+    public void clickOutside() {
+        ContainerOperator context = (ContainerOperator) Context.getContext();
+        ComponentChooser chooser = new CustomWidgetChooser();
+        JComponentOperator operator = new JComponentOperator(context, chooser);
+        CustomWidget w = (CustomWidget)operator.getSource();
+        Rectangle bounds = w.getHexagon().getBounds();
+        operator.clickMouse(bounds.x - 10, bounds.y - 10, 1);
+    }
+        
+		/*@RobotKeyword("Clicks inside the octagon of the custom widget.\n")
+    @ArgumentNames({})
+    public void clickOctagonInside() {
         ContainerOperator context = (ContainerOperator) Context.getContext();
         ComponentChooser chooser = new CustomWidgetChooser();
         JComponentOperator operator = new JComponentOperator(context, chooser);
         CustomWidget w = (CustomWidget)operator.getSource();
         Rectangle bounds = w.getShape().getBounds();
         operator.clickMouse(bounds.x + bounds.width/2, bounds.y + bounds.height/2, 1);
-    }
-    
-    @RobotKeyword("Clicks outside the shape of the custom widget.\n")
-    @ArgumentNames({})
-    public void clickCustomWidgetOutside() {
-        ContainerOperator context = (ContainerOperator) Context.getContext();
-        ComponentChooser chooser = new CustomWidgetChooser();
-        JComponentOperator operator = new JComponentOperator(context, chooser);
-        CustomWidget w = (CustomWidget)operator.getSource();
-        Rectangle bounds = w.getShape().getBounds();
-        operator.clickMouse(bounds.x - 10, bounds.y - 10, 1);
-    }
-        
+    }*/
+	
     class CustomWidgetChooser implements ComponentChooser {
         public CustomWidgetChooser() {}
         public boolean checkComponent(Component comp) {
